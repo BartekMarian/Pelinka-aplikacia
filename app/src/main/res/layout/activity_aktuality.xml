@@ -13,51 +13,51 @@
         android:background="#FFFFFF"
         android:theme="@style/Theme.Ver50.AppBarOverlay">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar_chat"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@color/black"
-        app:popupTheme="@style/Theme.Ver50.PopupOverlay"
-        >
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/profile_user_chat"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:src="@drawable/ic_baseline_person_outline_24"
-            android:tint="@color/white"
-            android:layout_marginLeft="80dp"
-            android:layout_marginStart="80dp">
-        </de.hdodenhof.circleimageview.CircleImageView>
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar_chat"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/black"
+            app:popupTheme="@style/Theme.Ver50.PopupOverlay"
+            >
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/profile_user_chat2"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:src="@drawable/ic_baseline_person_outline_24"
+                android:tint="@color/white"
+                android:layout_marginLeft="80dp"
+                android:layout_marginStart="80dp">
+            </de.hdodenhof.circleimageview.CircleImageView>
 
-        <TextView
-            android:id="@+id/user_name_chat"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="13dp"
-            android:layout_marginLeft="13dp"
-            android:text="@string/uzivatel"
-            android:textColor="@color/white"
-            android:textSize="18sp"
-            android:textStyle="bold" />
-    </androidx.appcompat.widget.Toolbar>
+            <TextView
+                android:id="@+id/user_name_chat2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="13dp"
+                android:layout_marginLeft="13dp"
+                android:text="@string/uzivatel"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+        </androidx.appcompat.widget.Toolbar>
 
 
-</com.google.android.material.appbar.AppBarLayout>
+    </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_view_chat"
+        android:id="@+id/recycler_view_aktuality"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/appBarLayout"
-        android:layout_above="@id/relative_layout_bottom"
+        android:layout_above="@id/relative_layout_bottom2"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         >
 
     </androidx.recyclerview.widget.RecyclerView>
 
     <RelativeLayout
-        android:id="@+id/relative_layout_bottom"
+        android:id="@+id/relative_layout_bottom2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -65,7 +65,7 @@
         android:padding="6dp">
 
         <ImageView
-            android:id="@+id/attact_image_file"
+            android:id="@+id/attact_image_file2"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_alignParentStart="true"
@@ -75,14 +75,14 @@
         </ImageView>
 
         <EditText
-            android:id="@+id/text_message_chat"
+            android:id="@+id/text_message_chat2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginLeft="6dp"
             android:layout_marginRight="6dp"
-            android:layout_toLeftOf="@id/send_mesage_button"
-            android:layout_toRightOf="@id/attact_image_file"
+            android:layout_toLeftOf="@id/send_mesage_button2"
+            android:layout_toRightOf="@id/attact_image_file2"
             android:background="@android:color/transparent"
             android:hint="vložte príspevok..."
             android:textColorHint="@color/white"
@@ -94,7 +94,7 @@
         </EditText>
 
         <ImageView
-            android:id="@+id/send_mesage_button"
+            android:id="@+id/send_mesage_button2"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_alignParentEnd="true"
@@ -102,7 +102,5 @@
             android:background="@drawable/ic_baseline_send_24">
 
         </ImageView>
-
-
     </RelativeLayout>
 </RelativeLayout>

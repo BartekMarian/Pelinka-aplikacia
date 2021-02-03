@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="200dp"
+    android:orientation="vertical"
+    >
+    <LinearLayout
+        android:id="@+id/Lin_image"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:orientation="horizontal">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/profile_user_diskusia_image"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+            android:src="@drawable/ic_baseline_person_outline_24"
+            android:tint="@color/white"
+            android:layout_marginTop="50dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginStart="0dp">
+        </de.hdodenhof.circleimageview.CircleImageView>
+
+        <ImageView
+            android:id="@+id/image_message_diskusia"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginStart="50dp"
+            android:textColor="@color/black"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/Lin_date"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        >
+        <TextView
+            android:id="@+id/date_time2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="200dp"
+            android:layout_marginStart="200dp"
+            android:textColor="@color/black"
+            android:text="12:00 PM"
+            android:textSize="14sp"
+            >
+        </TextView>
+    </LinearLayout>
+
+</LinearLayout>

@@ -15,11 +15,11 @@ import de.hdodenhof.circleimageview.CircleImageView
 import java.text.SimpleDateFormat
 import java.util.*
 
-class ChatAdapter (
+class AktualityAdapter (
         mContext: Context,
         mChatList: MutableList<Chat>,
 
-) : RecyclerView.Adapter<RecyclerView.ViewHolder?>()
+        ) : RecyclerView.Adapter<RecyclerView.ViewHolder?>()
 {
 
     private val mContext:Context
@@ -48,12 +48,12 @@ class ChatAdapter (
         val view : View
 
         return if (viewType == POST_TYPE_TEXT) {
-            view =  LayoutInflater.from(mContext).inflate(R.layout.message_item_left,parent,false)
+            view =  LayoutInflater.from(mContext).inflate(R.layout.message_item_aktuality_messages,parent,false)
             TextViewHolder(view)
         }
         else
         {
-            view = LayoutInflater.from(mContext).inflate(R.layout.message_item_image, parent, false)
+            view = LayoutInflater.from(mContext).inflate(R.layout.message_item_aktuality_images, parent, false)
             ImageViewHolder(view)
         }
     }
@@ -97,15 +97,15 @@ class ChatAdapter (
     }
 
     inner class TextViewHolder(itemView: View):RecyclerView.ViewHolder(itemView){
-           var profileImageDiskusia : CircleImageView
-           var chat_message : TextView
-           var timeText: TextView
+        var profileImageDiskusia : CircleImageView
+        var chat_message : TextView
+        var timeText: TextView
 
-           init {
-               profileImageDiskusia = itemView.findViewById(R.id.profile_user_above)
-               chat_message = itemView.findViewById(R.id.peopleTxt)
-                timeText = itemView.findViewById(R.id.date_time)
-           }
+        init {
+            profileImageDiskusia = itemView.findViewById(R.id.profile_user_above2)
+            chat_message = itemView.findViewById(R.id.peopleTxt2)
+            timeText = itemView.findViewById(R.id.date_time6)
+        }
     }
     inner class ImageViewHolder(itemView: View):RecyclerView.ViewHolder(itemView){
         var profileImageDiskusia2 : CircleImageView
@@ -113,9 +113,9 @@ class ChatAdapter (
         var timeText1: TextView
 
         init {
-            profileImageDiskusia2 = itemView.findViewById(R.id.profile_user_diskusia_image)
-            chat_image = itemView.findViewById(R.id.image_message_diskusia)
-            timeText1 = itemView.findViewById(R.id.date_time2)
+            profileImageDiskusia2 = itemView.findViewById(R.id.profile_user_diskusia_image2)
+            chat_image = itemView.findViewById(R.id.image_message_diskusia2)
+            timeText1 = itemView.findViewById(R.id.date_time5)
         }
     }
 }
