@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="example.javatpoint.com.kotlinoptionsmenu.MainActivity"
+    >
+    <item
+        android:id="@+id/action_about"
+        android:orderInCategory="100"
+        android:title="@string/o_n_s">
+    </item>
+
+    <item
+        android:id="@+id/action_kalendar"
+        android:orderInCategory="100"
+        android:title="@string/pe_ov_kalend_r">
+    </item>
+
+    <item
+        android:id="@+id/action_logout"
+        android:orderInCategory="100"
+        android:title="@string/odh_si_sa">
+    </item>
+</menu>

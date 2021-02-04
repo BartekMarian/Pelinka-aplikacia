@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1082080267951",
+    "firebase_url": "https://pelova-apka-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "pelova-apka",
+    "storage_bucket": "pelova-apka.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1082080267951:android:3d7f3756dd093953e08e5a",
+        "android_client_info": {
+          "package_name": "com.example"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1082080267951-ot1iojsinf3aijg2lml870753svisada.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example",
+            "certificate_hash": "a69098604febde57089f906123c86a3d0f6450d7"
+          }
+        },
+        {
+          "client_id": "1082080267951-bmfe9s1l5v81kgpd1u1b4tbesdhjk64t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCSPPU4DA5anUtvZ3YJrfghLY_aWtl8jk0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1082080267951-bmfe9s1l5v81kgpd1u1b4tbesdhjk64t.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,90 @@
+<resources>
+    <string name="app_name">ver.5.0</string>
+    <string name="zaregistrovat">Zaregistrovat</string>
+    <string name="mobil">Mobil</string>
+    <string name="uzivatelske_meno">Uzivatelske meno</string>
+    <string name="registracia">Registracia</string>
+    <string name="title_activity_main2">MainActivity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+    <string name="prihlasit_sa">Prihlasit sa</string>
+    <string name="pre_prihlasenie_sa_zaregistrujte">Pre prihlasenie sa zaregistrujte</string>
+    <string name="registrovat">Registrovat</string>
+    <string name="datelina">Datelina</string>
+    <string name="heslo">Heslo</string>
+    <string name="e_mail">E-mail</string>
+    <string name="title_activity_settings">SettingsActivity</string>
+
+    <!-- Preference Titles -->
+    <string name="messages_header">Messages</string>
+    <string name="sync_header">Sync</string>
+
+    <!-- Messages Preferences -->
+    <string name="signature_title">Your signature</string>
+    <string name="reply_title">Default reply action</string>
+
+    <!-- Sync Preferences -->
+    <string name="sync_title">Sync email periodically</string>
+    <string name="attachment_title">Download incoming attachments</string>
+    <string name="attachment_summary_on">Automatically download attachments for incoming emails
+    </string>
+    <string name="attachment_summary_off">Only download attachments when manually requested</string>
+    <string name="title_activity_main3">MainActivity3</string>
+    <string name="tab_text_1">Peľove správy</string>
+    <string name="tab_text_2">Kvalita ovzdušia</string>
+    <string name="pelka">Pelka</string>
+    <string name="log_out">Odhlásiť</string>
+    <string name="pelove">peľove</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="uzivatel">Uzivatel</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="pelove_spravy">Peľové správy</string>
+    <string name="kalendar">Kalendár</string>
+    <string name="kvalita_vzduchu">Kvalita vzduchu</string>
+    <string name="todo">TODO</string>
+    <string name="vitajte">Vitajte</string>
+    <string name="welcome_login">Prihlásiť sa</string>
+    <string name="pelinka">Pelinka</string>
+    <string name="registrova">Registrovať</string>
+    <string name="odh_si_sa">Odhásiť sa</string>
+    <string name="onas">O nás</string>
+    <string name="notifications">Hlásenia</string>
+    <string name="profil">Profil</string>
+    <string name="profil_settings">Profil</string>
+    <string name="hl_senia">Hlásenia</string>
+    <string name="about">O nás</string>
+    <string name="about_page">O nás</string>
+    <string name="hlasenia_page">Hlásenia</string>
+    <string name="profil_page">Profil</string>
+    <string name="username_profilePage">username</string>
+    <string name="user_name">user-name</string>
+    <string name="kvalita_ovzdu_ia">Kvalita ovzdušia</string>
+    <string name="prihl_si_sa">Prihlásiť sa</string>
+    <string name="o_n_s">O nás</string>
+    <string name="diskusia2">Diskusia</string>
+    <string name="diskusia">Diskusia</string>
+    <string name="odosla">Odoslať</string>
+    <string name="nap_te_spr_vu">Napíšte správu</string>
+    <string name="testovacia_spr_va">Testovacia správa</string>
+    <string name="zaregistrova_sa">Zaregistrovať sa</string>
+    <string name="pr_spevky">Príspevky</string>
+    <string name="pe_ov_kalend_r">Peľový kalendár</string>
+    <string name="vlhkos">vlhkosť</string>
+    <string name="r_chlos_vetra">rýchlosť vetra</string>
+</resources>
