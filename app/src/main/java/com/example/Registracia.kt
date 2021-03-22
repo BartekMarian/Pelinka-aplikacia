@@ -50,8 +50,7 @@ class Registracia : AppCompatActivity() {
         val userpassword: String = findViewById<EditText>(R.id.password_register).text.toString()
         val useremail = findViewById<EditText>(R.id.emailAddress_register).text.toString()
         val userphone: String = findViewById<EditText>(R.id.phone_register).text.toString()
-
-        println("test registracie" + useremail+username+userpassword+userphone)
+        
  //Vstupy od užívateľa sa uložia do premenných username,userpassword, useremail a userphone
 
         if (username == "")   // pole nesmie byť prázdne
@@ -66,7 +65,6 @@ class Registracia : AppCompatActivity() {
         } else {
             auth.createUserWithEmailAndPassword(useremail, userpassword)  // uloženie údajov do DB
                     .addOnCompleteListener { task ->
-                        println("print nieco................................OK")
                         verification_of_email()
                         if (task.isSuccessful) {
                             firebaseUserID = auth.currentUser!!.uid
@@ -80,6 +78,7 @@ class Registracia : AppCompatActivity() {
                             userHashMap["phone"] = userphone
                             userHashMap["useremail"] = useremail
                             userHashMap["password"] = userpassword
+                            userHashMap["switch4"] = false
                             refUser!!.updateChildren(userHashMap)
                                     .addOnCompleteListener { task ->
                                         if (task.isSuccessful) {
@@ -89,7 +88,6 @@ class Registracia : AppCompatActivity() {
                                             startActivity(intent)
                                         }
                                     }
-                            println("print nieco................................OK"+firebaseUserID)
                         } else {
                             Toast.makeText(
                                     this,
@@ -105,7 +103,6 @@ class Registracia : AppCompatActivity() {
         val user = FirebaseAuth.getInstance().currentUser
         user?.sendEmailVerification()?.addOnCompleteListener{
             Toast.makeText(this, "Registrácia prebehla úspešne, prosím overte Vašu emailovú adresu", Toast.LENGTH_LONG).show()
-            println("print nieco................................OK")
         }
 
     }

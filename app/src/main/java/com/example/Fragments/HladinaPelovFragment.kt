@@ -2,22 +2,29 @@ package com.example.Fragments
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.app.NotificationChannel
+import android.app.NotificationManager
 import android.content.Context
+import android.content.Context.NOTIFICATION_SERVICE
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Paint
 import android.location.Location
 import android.location.LocationListener
 import android.location.LocationManager
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.example.Kalendar
 import com.example.R
+import com.google.firebase.firestore.FirebaseFirestore
 import com.squareup.okhttp.OkHttpClient
 import com.squareup.okhttp.Request
 import kotlinx.android.synthetic.main.fragment_hladina_pelov.*
@@ -49,13 +56,14 @@ private const val ARG_PARAM2 = "param2"
     private lateinit var userLocation: String
 
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
+
+
         getLocation()
 
 
@@ -77,7 +85,7 @@ private const val ARG_PARAM2 = "param2"
                 val client = OkHttpClient()
                 val request = Request.Builder()
           //             .url("https://air-quality.p.rapidapi.com/current/airquality?" + userLocation)
-                        .url (userLocation)
+                        .url(userLocation)
                         .get()
                         .addHeader("x-rapidapi-key", "99e79c0f6bmshc123686311b75c7p12063ajsn680bf32ad0ca")
                         .addHeader("x-rapidapi-host", "air-quality.p.rapidapi.com")
@@ -91,6 +99,7 @@ private const val ARG_PARAM2 = "param2"
                     stream.cityName.text = "Peľové správy pre okres " + jobject.getString("city_name")
                     val mold = jobject.getJSONArray("data").getJSONObject(0).getString("predominant_pollen_type")
                     if (mold == "Molds"){
+                        notifikacia()
                         stream.moods.text = "Hubové plesne"
                     } else {
                         stream.moods.text = "Ostatné alergény : " + mold
@@ -102,21 +111,42 @@ private const val ARG_PARAM2 = "param2"
                     val weed =jobject.getJSONArray("data").getJSONObject(0).getInt("pollen_level_weed")
                     stream.level_weed.text = "Trávy úroveň "+weed.toString()
 
+                val db = FirebaseFirestore.getInstance()
 
+                val user: MutableMap<String, Any> = HashMap()
+                user.put("Molds", mold)
+                user.put("tree", tree)
+                user.put("grass", grass)
+                user.put("weed", weed)
 
-                linkKalendar.setOnClickListener(object: View.OnClickListener {
-                    override fun onClick(view: View){
+                        val document_ID = "bKZbPuXIa4CalyJFvHUI"
+                db.collection("Pollen news").document(document_ID).update(user)
 
-                        val intent = Intent(context, Kalendar::class.java)
-                        startActivity(intent)
-                    }
-                })
 
             } catch (ex: java.lang.Exception) {
                 ex.printStackTrace()
             }
         }.start()
     }
+
+    fun notifikacia (){
+        val CHANNEL_ID = "1"
+        val channelId = "test"
+        val description = "Test notification"
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            // Create the NotificationChannel
+            val name = channelId
+            val descriptionText = description
+            val importance = NotificationManager.IMPORTANCE_DEFAULT
+            val mChannel = NotificationChannel(CHANNEL_ID, name, importance)
+            mChannel.description = descriptionText
+            // Register the channel with the system; you can't change the importance
+            // or other notification behaviors after this
+            val notificationManager = getContext()?.getSystemService(NOTIFICATION_SERVICE) as NotificationManager
+            notificationManager.createNotificationChannel(mChannel)
+        }
+    }
+
 
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
@@ -136,11 +166,24 @@ private const val ARG_PARAM2 = "param2"
             savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
-    stream = inflater.inflate(R.layout.fragment_hladina_pelov, container, false)
+     stream = inflater.inflate(R.layout.fragment_hladina_pelov, container, false)
 
         return stream
 
     }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val kalendar: TextView? = stream.findViewById(R.id.linkKalendar)
+        kalendar?.setOnClickListener {
+
+            val intent = Intent(activity, Kalendar::class.java)
+            activity?.startActivity(intent)
+        }
+        linkKalendar.paintFlags = linkKalendar.paintFlags or (Paint.UNDERLINE_TEXT_FLAG)
+    }
+
 
 
 

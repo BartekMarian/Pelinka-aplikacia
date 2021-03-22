@@ -122,6 +122,9 @@ class KalendarFragment : Fragment() {
                     else if (sky == "snow"){
                         test.sky_pocasie.text = "Sneženie"
                         Glide.with(this).load("https://cdn.dribbble.com/users/2120934/screenshots/6193458/13_snow.gif").into(snow_sky)
+                    } else if (sky == "Light Snow"){
+                        test.sky_pocasie.text = "Sneženie"
+                        Glide.with(this).load("https://cdn.dribbble.com/users/2120934/screenshots/6193458/13_snow.gif").into(snow_sky)
                     }
                     else if (sky == "Light rain"){
                         test.sky_pocasie.text ="Daždivé počasie"

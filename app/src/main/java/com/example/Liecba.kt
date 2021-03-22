@@ -1,7 +1,10 @@
 package com.example
 
 
+import android.app.AlarmManager
+import android.app.PendingIntent
 import android.app.ProgressDialog
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -39,7 +42,8 @@ import java.util.*
 import kotlin.collections.HashMap
 
 
-class Liecba :  AppCompatActivity()    {
+class Liecba : AppCompatActivity()  {
+
 
     companion object {
         val TAG = "Chatlog"
@@ -97,6 +101,8 @@ class Liecba :  AppCompatActivity()    {
             }
         })
 
+
+
         runOnUiThread {
             retrieveMessages(senderId = String())
         }
@@ -119,6 +125,7 @@ class Liecba :  AppCompatActivity()    {
                                     adapter.add(UserItem_liecba(user, message))
 
                                 }
+                                Notifikacie().hlasenia()
                             }
                         }
 
@@ -128,6 +135,7 @@ class Liecba :  AppCompatActivity()    {
                     recycler_view_chats.adapter = adapter
                 }
                 text_message_chat1.setText("")
+
             }
         }
 
@@ -156,11 +164,14 @@ class Liecba :  AppCompatActivity()    {
         }
     }
 
+
+
     private fun pick_image() {
         val intent = Intent()
         intent.action = Intent.ACTION_GET_CONTENT
         intent.type = "image/*"
         startActivityForResult(Intent.createChooser(intent, "Vyberte obrázok"), 438)
+
     }
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -227,13 +238,26 @@ class Liecba :  AppCompatActivity()    {
         }
     }
 
+    private fun startAlarm(){
+        val alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        val intent = Intent(this, AlarmReceiver::class.java)
+        val pendingIntent = PendingIntent.getBroadcast(this, 0, intent, 0)
+        val calendar: Calendar = Calendar.getInstance()
+        calendar.timeInMillis = System.currentTimeMillis()
+        calendar.add(Calendar.SECOND, 3)
+        alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.timeInMillis, pendingIntent)
+        Toast.makeText(baseContext, "Starting Service Alarm", Toast.LENGTH_LONG).show()
+    }
+
+
     private fun send_message(uid: String, message: String, profile_user: String) {
         val reference = FirebaseDatabase.getInstance().reference
         val messageKey = reference.push().key
         val mesageHashMap = HashMap<String, Any?>()
         val timestamp = Calendar.getInstance().timeInMillis
         val profile_image_ref = FirebaseDatabase.getInstance().reference.child("Users").child(firebaseUser!!.uid)
-        var profile_user = ""
+        var profile_user:String
+
         profile_image_ref.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(p0: DataSnapshot) {
                 if (p0.exists()) {
@@ -283,7 +307,9 @@ class Liecba :  AppCompatActivity()    {
             }
 
         })
+
     }
+
 }
 
 

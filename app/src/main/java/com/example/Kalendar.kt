@@ -5,7 +5,10 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 
+
 class Kalendar : AppCompatActivity() {
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_kalendar)
@@ -19,5 +22,6 @@ class Kalendar : AppCompatActivity() {
             startActivity(intent)
             finish()
         }
+
     }
 }

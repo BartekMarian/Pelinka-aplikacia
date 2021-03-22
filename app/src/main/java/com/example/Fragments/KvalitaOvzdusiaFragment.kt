@@ -23,6 +23,7 @@ import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
 import com.github.mikephil.charting.utils.ColorTemplate
 import com.github.mikephil.charting.utils.MPPointF
+import com.google.firebase.firestore.FirebaseFirestore
 import com.squareup.okhttp.OkHttpClient
 import com.squareup.okhttp.Request
 import kotlinx.android.synthetic.main.fragment_kvalita_ovzdusia.*
@@ -128,7 +129,6 @@ private const val ARG_PARAM2 = "param2"
                         .build()
 
                 val response = client.newCall(request).execute()
-
                 val jsonData: String = response.body().string()
                 val jObjectData = JSONObject(jsonData).getJSONArray("data").getJSONObject(0)
 
@@ -136,173 +136,203 @@ private const val ARG_PARAM2 = "param2"
                     pieChart = piechart
 
                     val grid1 = jObjectData.getString("co")
-                    if (grid1.toFloat()<1000){
+                    if (grid1.toFloat() < 1000) {
                         CO2.setTextColor(Color.parseColor("#006400"))
-                        val co_rounded = java.math.BigDecimal(grid1).setScale(0, RoundingMode.HALF_EVEN)
-                        stream1.CO2.text = co_rounded.toString()+" µg"
-                        CO2_level.setText("veľmi dobrá") }
-                    else if(grid1.toFloat()<2000){
+                        val co_rounded =
+                            java.math.BigDecimal(grid1).setScale(0, RoundingMode.HALF_EVEN)
+                        stream1.CO2.text = co_rounded.toString() + " µg"
+                        CO2_level.setText("veľmi dobrá")
+                    } else if (grid1.toFloat() < 2000) {
                         CO2.setTextColor(Color.parseColor("#00FF00"))
-                        val co_rounded1 = java.math.BigDecimal(grid1).setScale(0, RoundingMode.HALF_EVEN)
-                        stream1.CO2.text = co_rounded1.toString()+" µg"
-                        CO2_level.setText("dobrá") }
-                    else if(grid1.toFloat()<10000){
+                        val co_rounded1 =
+                            java.math.BigDecimal(grid1).setScale(0, RoundingMode.HALF_EVEN)
+                        stream1.CO2.text = co_rounded1.toString() + " µg"
+                        CO2_level.setText("dobrá")
+                    } else if (grid1.toFloat() < 10000) {
                         CO2.setTextColor(Color.parseColor("#CCCC00"))
-                        val co_rounded2 = java.math.BigDecimal(grid1).setScale(0, RoundingMode.HALF_EVEN)
-                        stream1.CO2.text = co_rounded2.toString()+" µg"
-                        CO2_level.setText("zhoršená") }
-                    else if(grid1.toFloat()<30000){
+                        val co_rounded2 =
+                            java.math.BigDecimal(grid1).setScale(0, RoundingMode.HALF_EVEN)
+                        stream1.CO2.text = co_rounded2.toString() + " µg"
+                        CO2_level.setText("zhoršená")
+                    } else if (grid1.toFloat() < 30000) {
                         CO2.setTextColor(Color.parseColor("#FF8000"))
-                        val co_rounded3 = java.math.BigDecimal(grid1).setScale(0, RoundingMode.HALF_EVEN)
-                        stream1.CO2.text = co_rounded3.toString()+" µg"
-                        CO2_level.setText("zlá") }
-                    else if(grid1.toFloat()>30000){
+                        val co_rounded3 =
+                            java.math.BigDecimal(grid1).setScale(0, RoundingMode.HALF_EVEN)
+                        stream1.CO2.text = co_rounded3.toString() + " µg"
+                        CO2_level.setText("zlá")
+                    } else if (grid1.toFloat() > 30000) {
                         CO2.setTextColor(Color.parseColor("#FF0000"))
-                        val co_rounded4 = java.math.BigDecimal(grid1).setScale(0, RoundingMode.HALF_EVEN)
-                        stream1.CO2.text = co_rounded4.toString()+" µg"
-                        CO2_level.setText("veľmi zlá") }
+                        val co_rounded4 =
+                            java.math.BigDecimal(grid1).setScale(0, RoundingMode.HALF_EVEN)
+                        stream1.CO2.text = co_rounded4.toString() + " µg"
+                        CO2_level.setText("veľmi zlá")
+                    }
 
                     val grid2 = jObjectData.getString("o3")
-                    if (grid2.toFloat()<33){
-                       O3.setTextColor(Color.parseColor("#006400"))
-                        val o3_rounded = java.math.BigDecimal(grid2).setScale(0, RoundingMode.HALF_EVEN)
-                        stream1.O3.text = o3_rounded.toString()+" µg"
-                        O3_level.setText("veľmi dobrá") }
-                    else if(grid2.toFloat()<65){
+                    if (grid2.toFloat() < 33) {
+                        O3.setTextColor(Color.parseColor("#006400"))
+                        val o3_rounded =
+                            java.math.BigDecimal(grid2).setScale(0, RoundingMode.HALF_EVEN)
+                        stream1.O3.text = o3_rounded.toString() + " µg"
+                        O3_level.setText("veľmi dobrá")
+                    } else if (grid2.toFloat() < 65) {
                         O3.setTextColor(Color.parseColor("#00FF00"))
-                        val o3_rounded1 = java.math.BigDecimal(grid2).setScale(0, RoundingMode.HALF_EVEN)
-                        stream1.O3.text = o3_rounded1.toString()+" µg"
-                        O3_level.setText("dobrá") }
-                    else if(grid2.toFloat()<180){
+                        val o3_rounded1 =
+                            java.math.BigDecimal(grid2).setScale(0, RoundingMode.HALF_EVEN)
+                        stream1.O3.text = o3_rounded1.toString() + " µg"
+                        O3_level.setText("dobrá")
+                    } else if (grid2.toFloat() < 180) {
                         O3.setTextColor(Color.parseColor("#CCCC00"))
-                        val o3_rounded2 = java.math.BigDecimal(grid2).setScale(0, RoundingMode.HALF_EVEN)
-                        stream1.O3.text = o3_rounded2.toString()+" µg"
-                        O3_level.setText("zhoršená") }
-                    else if(grid2.toFloat()<240){
+                        val o3_rounded2 =
+                            java.math.BigDecimal(grid2).setScale(0, RoundingMode.HALF_EVEN)
+                        stream1.O3.text = o3_rounded2.toString() + " µg"
+                        O3_level.setText("zhoršená")
+                    } else if (grid2.toFloat() < 240) {
                         O3.setTextColor(Color.parseColor("#FF8000"))
-                        val o3_rounded3 = java.math.BigDecimal(grid2).setScale(0, RoundingMode.HALF_EVEN)
-                        stream1.O3.text = o3_rounded3.toString()+" µg"
-                        O3_level.setText("zlá") }
-                    else if(grid2.toFloat()>240){
+                        val o3_rounded3 =
+                            java.math.BigDecimal(grid2).setScale(0, RoundingMode.HALF_EVEN)
+                        stream1.O3.text = o3_rounded3.toString() + " µg"
+                        O3_level.setText("zlá")
+                    } else if (grid2.toFloat() > 240) {
                         O3.setTextColor(Color.parseColor("#FF0000"))
-                        val o3_rounded4 = java.math.BigDecimal(grid2).setScale(0, RoundingMode.HALF_EVEN)
-                        stream1.O3.text = o3_rounded4.toString()+" µg"
-                        O3_level.setText("veľmi zlá") }
+                        val o3_rounded4 =
+                            java.math.BigDecimal(grid2).setScale(0, RoundingMode.HALF_EVEN)
+                        stream1.O3.text = o3_rounded4.toString() + " µg"
+                        O3_level.setText("veľmi zlá")
+                    }
 
 
                     val grid3 = jObjectData.getString("no2")
-                    if (grid3.toFloat()<20){
+                    if (grid3.toFloat() < 20) {
                         No2.setTextColor(Color.parseColor("#006400"))
-                        val no2_rounded = java.math.BigDecimal(grid3).setScale(0, RoundingMode.HALF_EVEN)
-                        stream1.No2.text = no2_rounded.toString()+" µg"
-                        No2_level.setText("veľmi dobrá") }
-                    else if(grid3.toFloat()<40){
+                        val no2_rounded =
+                            java.math.BigDecimal(grid3).setScale(0, RoundingMode.HALF_EVEN)
+                        stream1.No2.text = no2_rounded.toString() + " µg"
+                        No2_level.setText("veľmi dobrá")
+                    } else if (grid3.toFloat() < 40) {
                         No2.setTextColor(Color.parseColor("#00FF00"))
-                        val no2_rounded1 = java.math.BigDecimal(grid3).setScale(0, RoundingMode.HALF_EVEN)
-                        stream1.No2.text = no2_rounded1.toString()+" µg"
-                        No2_level.setText("dobrá") }
-                    else if(grid3.toFloat()<200){
+                        val no2_rounded1 =
+                            java.math.BigDecimal(grid3).setScale(0, RoundingMode.HALF_EVEN)
+                        stream1.No2.text = no2_rounded1.toString() + " µg"
+                        No2_level.setText("dobrá")
+                    } else if (grid3.toFloat() < 200) {
                         No2.setTextColor(Color.parseColor("#CCCC00"))
-                        val no2_rounded2 = java.math.BigDecimal(grid3).setScale(0, RoundingMode.HALF_EVEN)
-                        stream1.No2.text = no2_rounded2.toString()+" µg"
-                        No2_level.setText("zhoršená") }
-                    else if(grid3.toFloat()<400){
+                        val no2_rounded2 =
+                            java.math.BigDecimal(grid3).setScale(0, RoundingMode.HALF_EVEN)
+                        stream1.No2.text = no2_rounded2.toString() + " µg"
+                        No2_level.setText("zhoršená")
+                    } else if (grid3.toFloat() < 400) {
                         No2.setTextColor(Color.parseColor("#FF8000"))
-                        val no2_rounded3 = java.math.BigDecimal(grid3).setScale(0, RoundingMode.HALF_EVEN)
-                        stream1.No2.text = no2_rounded3.toString()+" µg"
-                        No2_level.setText("zlá") }
-                    else if(grid3.toFloat()>400){
+                        val no2_rounded3 =
+                            java.math.BigDecimal(grid3).setScale(0, RoundingMode.HALF_EVEN)
+                        stream1.No2.text = no2_rounded3.toString() + " µg"
+                        No2_level.setText("zlá")
+                    } else if (grid3.toFloat() > 400) {
                         No2.setTextColor(Color.parseColor("#FF0000"))
-                        val no2_rounded4 = java.math.BigDecimal(grid3).setScale(0, RoundingMode.HALF_EVEN)
-                        stream1.No2.text = no2_rounded4.toString()+" µg"
-                        No2_level.setText("veľmi zlá") }
+                        val no2_rounded4 =
+                            java.math.BigDecimal(grid3).setScale(0, RoundingMode.HALF_EVEN)
+                        stream1.No2.text = no2_rounded4.toString() + " µg"
+                        No2_level.setText("veľmi zlá")
+                    }
 
                     val grid4 = jObjectData.getString("pm10")
-                    if (grid4.toFloat()<20){
+                    if (grid4.toFloat() < 20) {
                         pm10.setTextColor(Color.parseColor("#006400"))
-                        val pm10_rounded = java.math.BigDecimal(grid4).setScale(0, RoundingMode.HALF_EVEN)
-                        stream1.pm10.text = pm10_rounded.toString()+" µg"
-                        pm10_level.setText("veľmi dobrá") }
-                    else if(grid4.toFloat()<40){
+                        val pm10_rounded =
+                            java.math.BigDecimal(grid4).setScale(0, RoundingMode.HALF_EVEN)
+                        stream1.pm10.text = pm10_rounded.toString() + " µg"
+                        pm10_level.setText("veľmi dobrá")
+                    } else if (grid4.toFloat() < 40) {
                         pm10.setTextColor(Color.parseColor("#00FF00"))
-                        val pm10_rounded1 = java.math.BigDecimal(grid4).setScale(0, RoundingMode.HALF_EVEN)
-                        stream1.pm10.text = pm10_rounded1.toString()+" µg"
-                        pm10_level.setText("dobrá") }
-                    else if(grid4.toFloat()<100){
+                        val pm10_rounded1 =
+                            java.math.BigDecimal(grid4).setScale(0, RoundingMode.HALF_EVEN)
+                        stream1.pm10.text = pm10_rounded1.toString() + " µg"
+                        pm10_level.setText("dobrá")
+                    } else if (grid4.toFloat() < 100) {
                         pm10.setTextColor(Color.parseColor("#CCCC00"))
-                        val pm10_rounded2 = java.math.BigDecimal(grid4).setScale(0, RoundingMode.HALF_EVEN)
-                        stream1.pm10.text = pm10_rounded2.toString()+" µg"
-                        pm10_level.setText("zhoršená") }
-                    else if(grid4.toFloat()<180){
+                        val pm10_rounded2 =
+                            java.math.BigDecimal(grid4).setScale(0, RoundingMode.HALF_EVEN)
+                        stream1.pm10.text = pm10_rounded2.toString() + " µg"
+                        pm10_level.setText("zhoršená")
+                    } else if (grid4.toFloat() < 180) {
                         pm10.setTextColor(Color.parseColor("#FF8000"))
-                        val pm10_rounded3 = java.math.BigDecimal(grid4).setScale(0, RoundingMode.HALF_EVEN)
-                        stream1.pm10.text = pm10_rounded3.toString()+" µg"
-                        pm10_level.setText("zlá") }
-                    else if(grid4.toFloat()>180){
+                        val pm10_rounded3 =
+                            java.math.BigDecimal(grid4).setScale(0, RoundingMode.HALF_EVEN)
+                        stream1.pm10.text = pm10_rounded3.toString() + " µg"
+                        pm10_level.setText("zlá")
+                    } else if (grid4.toFloat() > 180) {
                         pm10.setTextColor(Color.parseColor("#FF0000"))
-                        val pm10_rounded4 = java.math.BigDecimal(grid4).setScale(0, RoundingMode.HALF_EVEN)
-                        stream1.pm10.text = pm10_rounded4.toString()+" µg"
-                        pm10_level.setText("veľmi zlá") }
+                        val pm10_rounded4 =
+                            java.math.BigDecimal(grid4).setScale(0, RoundingMode.HALF_EVEN)
+                        stream1.pm10.text = pm10_rounded4.toString() + " µg"
+                        pm10_level.setText("veľmi zlá")
+                    }
 
                     val grid5 = jObjectData.getString("pm25")
-                    if (grid5.toFloat()<14){
+                    if (grid5.toFloat() < 14) {
                         pm25.setTextColor(Color.parseColor("#006400"))
-                        val pm25_rounded = java.math.BigDecimal(grid5).setScale(0, RoundingMode.HALF_EVEN)
-                        stream1.pm25.text = pm25_rounded.toString()+" µg"
-                        pm25_level.setText("veľmi dobrá") }
-                    else if(grid5.toFloat()<25){
+                        val pm25_rounded =
+                            java.math.BigDecimal(grid5).setScale(0, RoundingMode.HALF_EVEN)
+                        stream1.pm25.text = pm25_rounded.toString() + " µg"
+                        pm25_level.setText("veľmi dobrá")
+                    } else if (grid5.toFloat() < 25) {
                         pm25.setTextColor(Color.parseColor("#00FF00"))
-                        val pm25_rounded1 = java.math.BigDecimal(grid5).setScale(0, RoundingMode.HALF_EVEN)
-                        stream1.pm25.text = pm25_rounded1.toString()+" µg"
-                        pm25_level.setText("dobrá") }
-                    else if(grid5.toFloat()<70){
+                        val pm25_rounded1 =
+                            java.math.BigDecimal(grid5).setScale(0, RoundingMode.HALF_EVEN)
+                        stream1.pm25.text = pm25_rounded1.toString() + " µg"
+                        pm25_level.setText("dobrá")
+                    } else if (grid5.toFloat() < 70) {
                         pm25.setTextColor(Color.parseColor("#CCCC00"))
-                        val pm25_rounded2 = java.math.BigDecimal(grid5).setScale(0, RoundingMode.HALF_EVEN)
-                        stream1.pm25.text = pm25_rounded2.toString()+" µg"
-                        pm25_level.setText("zhoršená") }
-                    else if(grid5.toFloat()<140){
+                        val pm25_rounded2 =
+                            java.math.BigDecimal(grid5).setScale(0, RoundingMode.HALF_EVEN)
+                        stream1.pm25.text = pm25_rounded2.toString() + " µg"
+                        pm25_level.setText("zhoršená")
+                    } else if (grid5.toFloat() < 140) {
                         pm25.setTextColor(Color.parseColor("#FF8000"))
-                        val pm25_rounded3 = java.math.BigDecimal(grid5).setScale(0, RoundingMode.HALF_EVEN)
-                        stream1.pm25.text = pm25_rounded3.toString()+" µg"
-                        pm25_level.setText("zlá") }
-                    else if(grid5.toFloat()>140){
+                        val pm25_rounded3 =
+                            java.math.BigDecimal(grid5).setScale(0, RoundingMode.HALF_EVEN)
+                        stream1.pm25.text = pm25_rounded3.toString() + " µg"
+                        pm25_level.setText("zlá")
+                    } else if (grid5.toFloat() > 140) {
                         pm25.setTextColor(Color.parseColor("#FF0000"))
-                        val pm25_rounded4 = java.math.BigDecimal(grid5).setScale(0, RoundingMode.HALF_EVEN)
-                        stream1.pm25.text = pm25_rounded4.toString()+" µg"
-                        pm25_level.setText("veľmi zlá") }
+                        val pm25_rounded4 =
+                            java.math.BigDecimal(grid5).setScale(0, RoundingMode.HALF_EVEN)
+                        stream1.pm25.text = pm25_rounded4.toString() + " µg"
+                        pm25_level.setText("veľmi zlá")
+                    }
 
                     val grid6 = jObjectData.getString("aqi")
-                    if (grid6.toFloat()<50){
+                    if (grid6.toFloat() < 50) {
                         aqi.setTextColor(Color.parseColor("#006400"))
-                        stream1.aqi.text = grid6.toString()+" µg"
-                        Aqi_level.setText("veľmi dobrá") }
-                    else if(grid6.toFloat()<100){
+                        stream1.aqi.text = grid6.toString() + " µg"
+                        Aqi_level.setText("veľmi dobrá")
+                    } else if (grid6.toFloat() < 100) {
                         aqi.setTextColor(Color.parseColor("#00FF00"))
-                        stream1.aqi.text = grid6.toString()+" µg"
-                        Aqi_level.setText("dobrá") }
-                    else if(grid6.toFloat()<150){
+                        stream1.aqi.text = grid6.toString() + " µg"
+                        Aqi_level.setText("dobrá")
+                    } else if (grid6.toFloat() < 150) {
                         aqi.setTextColor(Color.parseColor("#CCCC00"))
-                        stream1.aqi.text = grid6.toString()+" µg"
-                        Aqi_level.setText("zhoršená") }
-                    else if(grid6.toFloat()<200){
+                        stream1.aqi.text = grid6.toString() + " µg"
+                        Aqi_level.setText("zhoršená")
+                    } else if (grid6.toFloat() < 200) {
                         aqi.setTextColor(Color.parseColor("#FF8000"))
-                        stream1.aqi.text = grid6.toString()+" µg"
-                        Aqi_level.setText("zlá") }
-                    else if(grid6.toFloat()<300){
+                        stream1.aqi.text = grid6.toString() + " µg"
+                        Aqi_level.setText("zlá")
+                    } else if (grid6.toFloat() < 300) {
                         aqi.setTextColor(Color.parseColor("#FF0000"))
-                        stream1.aqi.text = grid6.toString()+" µg"
-                        Aqi_level.setText("veľmi zlá") }
-
+                        stream1.aqi.text = grid6.toString() + " µg"
+                        Aqi_level.setText("veľmi zlá")
+                    }
 
                     val air = ArrayList<PieEntry>()
-                   // air.add(PieEntry(grid1.toFloat(),"CO"))
-                    air.add(PieEntry(grid2.toFloat(),"O3"))
-                    air.add(PieEntry(grid3.toFloat(),"NO2"))
-                    air.add(PieEntry(grid4.toFloat(),"PM10"))
-                    air.add(PieEntry(grid5.toFloat(),"PM2,5"))
-                    air.add(PieEntry(grid6.toFloat(),"AQI"))
+                    air.add(PieEntry(grid1.toFloat(),"CO"))
+                    air.add(PieEntry(grid2.toFloat(), "O3"))
+                    air.add(PieEntry(grid3.toFloat(), "NO2"))
+                    air.add(PieEntry(grid4.toFloat(), "PM10"))
+                    air.add(PieEntry(grid5.toFloat(), "PM2,5"))
+                    air.add(PieEntry(grid6.toFloat(), "AQI"))
 
-                    val dataSet = PieDataSet(air,"")
+                    val dataSet = PieDataSet(air, "")
                     dataSet.setDrawIcons(true)
                     dataSet.sliceSpace = 5f
                     dataSet.iconsOffset = MPPointF(0F, 30F)
@@ -319,6 +349,14 @@ private const val ARG_PARAM2 = "param2"
                     pieChart.invalidate()
                     pieChart.animateXY(3500, 3500)
 
+
+                    val db = FirebaseFirestore.getInstance()
+
+                    val user: MutableMap<String, Any> = HashMap()
+                    user.put("AQI", grid6)
+
+                    val document_ID = "r88Ab2ZptiFooCcUXxMv"
+                    db.collection("Air qulaity new").document(document_ID).update(user)
                 }
             } catch (ex: java.lang.Exception) {
                 println("Error in try")
@@ -331,6 +369,7 @@ return stream1
     }
 
     companion object {
+
         /**
          * Use this factory method to create a new instance of
          * this fragment using the provided parameters.

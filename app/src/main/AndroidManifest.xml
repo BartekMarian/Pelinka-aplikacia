@@ -3,24 +3,29 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example">
 
-    <uses-permission android:name="android.permission.INTERNET">
-    </uses-permission>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE">
-    </uses-permission>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
-    tools:ignore="ScopedStorage" />
+    <uses-permission android:name="android.permission.READ_CALENDAR" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.WRITE_CALENDAR" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        tools:ignore="ScopedStorage" />
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/allergy"
         android:label="@string/pelinka"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/allergy"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Ver50.NoActionBar"
-         >
-        <activity android:name=".Registracia"/>
+        android:theme="@style/Theme.Ver50.NoActionBar">
+        <activity android:name=".ResetPassword"/>
+        <activity android:name=".Registracia" />
         <activity android:name=".MainActivity" />
         <activity android:name=".VitajteActivity">
             <intent-filter>
@@ -29,7 +34,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity2"/>
+        <activity android:name=".MainActivity2" />
         <activity android:name=".About" />
         <activity android:name=".Notifikacie" />
         <activity android:name=".Profil" />
@@ -38,5 +43,16 @@
         <activity android:name=".Liecba" />
         <activity android:name=".Aktuality" />
         <activity android:name=".Kalendar" />
+
+        <receiver android:name=".AlarmReceiver" />
+        <service android:name=".ForegroundService" />
+        <service android:name=".BackgroundTaskHandler"
+            android:permission="com.google.android.gms.permission.BIND_NETWORK_TASK_SERVICE"
+            android:exported="true">
+        <intent-filter>
+            <action android:name="com.google.android.gms.gcm.ACTION_TASK_READY"/>
+        </intent-filter>
+        </service>
     </application>
+
 </manifest>

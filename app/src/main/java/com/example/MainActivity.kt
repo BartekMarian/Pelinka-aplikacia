@@ -1,10 +1,10 @@
 package com.example
 
 import android.content.Intent
+import android.graphics.Paint
 import android.os.Bundle
-import android.widget.Button
-import android.widget.EditText
-import android.widget.Toast
+import android.view.View
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import com.google.android.gms.tasks.Task
@@ -30,10 +30,30 @@ class MainActivity : AppCompatActivity() {
         supportActionBar!!.title ="Prihlásenie"
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         toolbar.setNavigationOnClickListener{
-            val intent = Intent(this,VitajteActivity::class.java)
+            val intent = Intent(this, VitajteActivity::class.java)
             startActivity(intent)
             finish()
         }
+
+        val language = arrayOf("rebizsro@gmail.com", "slovfruco@gmail.com", "remgesro@gmail.com")
+
+        val adapter: ArrayAdapter<String> =
+            ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, language)
+
+        val actv = findViewById<View>(R.id.prihlasovacie_meno) as AutoCompleteTextView
+        actv.threshold = 1
+        actv.setAdapter(adapter)
+
+
+        val reset_password = findViewById<TextView>(R.id.reset_password)
+
+        reset_password.setOnClickListener {
+            val intent = Intent(this, ResetPassword::class.java)
+            startActivity(intent)
+            finish()
+        }
+
+        reset_password.paintFlags = reset_password.paintFlags or (Paint.UNDERLINE_TEXT_FLAG)
 
 
         val button = findViewById<Button>(R.id.button3)
@@ -46,8 +66,8 @@ class MainActivity : AppCompatActivity() {
     private fun addMessage(text: String): Task<String> {
         // Create the arguments to the callable function.
         val data = hashMapOf(
-                "text" to text,
-                "push" to true
+            "text" to text,
+            "push" to true
         )
 
         return functions
@@ -82,22 +102,26 @@ class MainActivity : AppCompatActivity() {
                         if (task.isSuccessful)
                         { // Pre prihlasenie si najskor treba verifikovat email
                             if (auth.currentUser?.isEmailVerified == true){
-                                val intent = Intent(this,MainActivity2::class.java)
+                                val intent = Intent(this, MainActivity2::class.java)
                                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
                                 startActivity(intent)
                                 finish()
                             }
                             else{
-                                Toast.makeText(this, "Pre prihlásenie najskôr everte emailovú adresu", Toast.LENGTH_LONG).show()
+                                Toast.makeText(
+                                    this,
+                                    "Pre prihlásenie najskôr everte emailovú adresu",
+                                    Toast.LENGTH_LONG
+                                ).show()
                             }
                             addMessage("Test Finkcie")
                         }
                         else
                         {
                             Toast.makeText(
-                                    this,
-                                    "Meno alebo heslo je nespravne" + task.exception!!.message.toString(),
-                                    Toast.LENGTH_LONG
+                                this,
+                                "Meno alebo heslo je nespravne" + task.exception!!.message.toString(),
+                                Toast.LENGTH_LONG
                             ).show()
                         }
                     }

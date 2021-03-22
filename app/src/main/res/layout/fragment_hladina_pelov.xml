@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:background="#e6e6e6"
     android:gravity="center_vertical"
     tools:context=".Fragments.KvalitaVzduchuFragment">
@@ -218,19 +218,18 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="30dp">
 
-            <Button
+            <TextView
                 android:id="@+id/linkKalendar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="30dp"
-                android:background="@drawable/rounded_buttton"
                 android:text="@string/pe_ov_kalend_r"
-                android:textSize="14sp"
-                android:textStyle="italic"
+                android:textSize="24sp"
+                android:textStyle="italic|bold"
                 app:backgroundTint="#33691E">
 
-            </Button>
+            </TextView>
         </LinearLayout>
 
     </LinearLayout>

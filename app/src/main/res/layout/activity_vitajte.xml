@@ -8,27 +8,28 @@
     android:gravity="center"
     android:orientation="vertical">
 
-   <TextView
-       android:layout_width="wrap_content"
-       android:layout_height="wrap_content"
-       android:textColor="@color/white"
-       android:textStyle="bold"
-       android:textSize="35sp"
-       android:text="@string/vitajte">
-   </TextView>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/vitajte"
+        android:textColor="@color/white"
+        android:textSize="40sp"
+        android:textStyle="bold">
+
+    </TextView>
 
     <Button
         android:id="@+id/welcome_log_in_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="45dp"
         android:background="@drawable/rounded_buttton"
         android:text="@string/welcome_login"
         android:textColor="@color/white"
         android:textSize="18sp"
         app:backgroundTint="@color/black"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"/>
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"/>
 
     <Button
         android:id="@+id/welcome_register_button"
@@ -40,8 +41,8 @@
         android:textColor="@color/white"
         android:textSize="18sp"
         app:backgroundTint="@color/black"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
         />
 
 

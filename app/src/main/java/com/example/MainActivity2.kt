@@ -21,11 +21,11 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.*
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_main2.*
-
 import java.util.*
 
 
- class MainActivity2 : AppCompatActivity() {
+
+class MainActivity2 : AppCompatActivity() {
 
     var refUsers: DatabaseReference? = null
     var firebaseUser: FirebaseUser? = null
@@ -80,6 +80,7 @@ import java.util.*
         })
     }
 
+
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.menu, menu)
@@ -109,7 +110,7 @@ import java.util.*
             R.id.action_logout ->
             {
                 FirebaseAuth.getInstance().signOut()
-
+                // ForegroundService.startService(this)
                 val intent = Intent(this, VitajteActivity::class.java)
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
                 this.startActivity(intent)

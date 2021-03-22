@@ -66,7 +66,7 @@
             <androidx.cardview.widget.CardView
                 android:id="@+id/card_liecba"
                 android:layout_width="match_parent"
-                android:layout_height="160dp"
+                android:layout_height="wrap_content"
                 android:layout_rowWeight="1"
                 android:layout_columnWeight="1"
                 android:layout_margin="12dp"
@@ -105,7 +105,7 @@
             <androidx.cardview.widget.CardView
                 android:id="@+id/card_aktuality"
                 android:layout_width="wrap_content"
-                android:layout_height="160dp"
+                android:layout_height="wrap_content"
                 android:layout_rowWeight="1"
                 android:layout_columnWeight="1"
                 android:layout_margin="12dp"
@@ -146,7 +146,7 @@
             <androidx.cardview.widget.CardView
                 android:id="@+id/card_diskusia"
                 android:layout_width="wrap_content"
-                android:layout_height="160dp"
+                android:layout_height="wrap_content"
                 android:layout_rowWeight="1"
                 android:layout_columnWeight="1"
                 android:layout_margin="12dp"

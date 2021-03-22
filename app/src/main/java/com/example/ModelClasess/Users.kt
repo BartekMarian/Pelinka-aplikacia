@@ -8,6 +8,7 @@ class Users {
     private var phone:String = ""
     private var useremail:String = ""
     private var password:String = ""
+    private var switch4:Boolean = true
 
     constructor()
 
@@ -18,7 +19,8 @@ class Users {
         username: String,
         phone: String,
         useremail: String,
-        password: String
+        password: String,
+        switch4:Boolean
     ) {
         this.uid = uid
         this.cover = cover
@@ -27,6 +29,7 @@ class Users {
         this.phone = phone
         this.useremail = useremail
         this.password = password
+        this.switch4 = switch4
     }
 
 
@@ -77,5 +80,11 @@ class Users {
     }
     fun setPassword(password:String){
         this.password = password
+    }
+    fun getSwitch4(): Boolean {
+        return switch4
+    }
+    fun setSwitch4(switch4: Boolean){
+        this.switch4 = switch4
     }
 }

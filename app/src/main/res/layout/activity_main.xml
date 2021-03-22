@@ -26,15 +26,19 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <EditText
+    <AutoCompleteTextView
         android:id="@+id/prihlasovacie_meno"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="48dp"
-        android:layout_marginTop="180dp"
+        android:layout_marginTop="210dp"
         android:layout_marginEnd="48dp"
         android:autofillHints=""
         android:ems="10"
+        android:drawableStart="@drawable/ic_baseline_email_custom"
+        android:drawableLeft="@drawable/ic_baseline_email_custom"
+        android:drawablePadding="12dp"
+        android:background="@drawable/custom_input"
         android:hint="@string/e_mail"
         android:inputType="textPersonName"
         android:padding="15dp"
@@ -43,7 +47,18 @@
         android:textSize="24sp"
         android:textStyle="bold" />
 
-    <EditText
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColorHint="#AB47BC"
+        app:counterEnabled="true"
+        app:counterMaxLength="10"
+        app:counterTextColor="@color/white"
+        app:counterOverflowTextColor="@color/black"
+        app:passwordToggleEnabled="true"
+        app:passwordToggleDrawable="@drawable/show_password_selector">
+
+    <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/password"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -52,17 +67,36 @@
         android:layout_marginEnd="48dp"
         android:autofillHints=""
         android:ems="10"
+        android:drawableStart="@drawable/ic_baseline_lock_custom"
+        android:drawableLeft="@drawable/ic_baseline_lock_custom"
+        android:drawablePadding="12dp"
         android:hint="@string/heslo"
         android:inputType="textPassword"
         android:padding="15dp"
         android:textColor="#AB47BC"
+        android:background="@drawable/custom_input"
         android:textColorHint="#AB47BC"
         android:textSize="24sp"
-        android:textStyle="bold">
+        android:textStyle="bold"
+        >
+    </com.google.android.material.textfield.TextInputEditText>
+    </com.google.android.material.textfield.TextInputLayout>
+    <TextView
+        android:id="@+id/reset_password"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginStart="78dp"
+        android:layout_marginEnd="78dp"
+        android:layout_marginTop="30dp"
+        android:text="Zabudli ste heslo?"
+        android:textSize="22sp"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:autoLink="all"
+        >
 
-    </EditText>
-
-
+    </TextView>
     <Button
         android:id="@+id/button3"
         android:layout_width="fill_parent"
@@ -75,6 +109,8 @@
         android:background="@drawable/rounded_buttton"
         app:backgroundTint="@color/black"
         />
+
+
 
 
 </LinearLayout>
