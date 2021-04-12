@@ -16,7 +16,6 @@ android {
         versionCode 1
         versionName "1.0"
         multiDexEnabled true
-
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -107,7 +106,5 @@ dependencies {
     implementation 'com.google.android.gms:play-services-gcm:17.0.0'
     implementation 'com.jonaswanke.calendar:calendar:0.1.1'
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-
-
-
+    implementation 'com.jakewharton.timber:timber:4.7.1'
 }

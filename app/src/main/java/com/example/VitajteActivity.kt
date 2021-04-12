@@ -19,8 +19,6 @@ class VitajteActivity : AppCompatActivity() {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
             finish()
-
-            ForegroundService.stopService(this)
         }
 
         val regButton = findViewById<Button>(R.id.welcome_register_button)

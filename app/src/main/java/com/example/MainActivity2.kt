@@ -20,9 +20,10 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.*
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.activity_kalendar.*
 import kotlinx.android.synthetic.main.activity_main2.*
+import kotlinx.android.synthetic.main.activity_notifikacie.*
 import java.util.*
-
 
 
 class MainActivity2 : AppCompatActivity() {
@@ -65,7 +66,7 @@ class MainActivity2 : AppCompatActivity() {
         tabLayout.setupWithViewPager(viewPager)
 
         //Zobrazenie profiloveho obrazka a mena uzivatela
-        refUsers!!.addValueEventListener(object : ValueEventListener{
+        refUsers!!.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(p0: DataSnapshot) {
                 if (p0.exists()) {
                     val user: Users? = p0.getValue(Users::class.java)
@@ -73,13 +74,34 @@ class MainActivity2 : AppCompatActivity() {
                     Picasso.get().load(user.getProfile()).into(profile_user)
                 }
             }
+
             override fun onCancelled(p0: DatabaseError) {
 
             }
 
         })
-    }
 
+        FirebaseDatabase.getInstance().getReference().child("Users").child(firebaseUser!!.uid).child(
+            "switch4"
+        ).get().addOnSuccessListener {
+//            switch4.isChecked = it.value as Boolean
+            println("Test............................................1" + it.value)
+            //TODO: if it.value = true, set alarm manager
+            if (it.value==true){
+
+                val mNotificationTime = Calendar.getInstance().timeInMillis + (1000 * 60 *1)//Set after 5 seconds from the current time.
+               // val mNotificationTime = Calendar.getInstance().timeInMillis + 5000 //Set after 5 seconds from the current time.
+                NotificationUtils().setNotification(mNotificationTime, this@MainActivity2)
+            } else {
+//                println("test5 " + "notification set to false")
+
+            }
+        }.addOnFailureListener {
+//            switch4.isChecked = false
+            println("Test............................................2 false")
+        }
+
+    }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -89,7 +111,7 @@ class MainActivity2 : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId){
-            R.id.action_about ->{
+            R.id.action_about -> {
                 val intent = Intent(this, About::class.java)
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
                 this.startActivity(intent)
@@ -98,7 +120,7 @@ class MainActivity2 : AppCompatActivity() {
             }
         }
         when (item.itemId){
-            R.id.action_kalendar ->{
+            R.id.action_kalendar -> {
                 val intent = Intent(this, Kalendar::class.java)
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
                 this.startActivity(intent)
@@ -107,10 +129,8 @@ class MainActivity2 : AppCompatActivity() {
             }
         }
         when (item.itemId) {
-            R.id.action_logout ->
-            {
+            R.id.action_logout -> {
                 FirebaseAuth.getInstance().signOut()
-                // ForegroundService.startService(this)
                 val intent = Intent(this, VitajteActivity::class.java)
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
                 this.startActivity(intent)

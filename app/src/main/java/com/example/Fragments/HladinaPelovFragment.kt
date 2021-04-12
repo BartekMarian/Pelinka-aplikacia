@@ -1,18 +1,13 @@
 package com.example.Fragments
 
 import android.Manifest
-import android.annotation.SuppressLint
-import android.app.NotificationChannel
-import android.app.NotificationManager
 import android.content.Context
-import android.content.Context.NOTIFICATION_SERVICE
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Paint
 import android.location.Location
 import android.location.LocationListener
 import android.location.LocationManager
-import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -62,11 +57,7 @@ private const val ARG_PARAM2 = "param2"
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
-
-
         getLocation()
-
-
     }
 
     private fun getLocation() {
@@ -76,10 +67,14 @@ private const val ARG_PARAM2 = "param2"
         }
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 5f, this)
     }
-    @SuppressLint("SetTextI18n")
+   // @SuppressLint("SetTextI18n")
     override fun onLocationChanged(location: Location) {
         //userLocation = "lon=" + location.longitude + "&lat=" + location.latitude
-        userLocation = "https://air-quality.p.rapidapi.com/current/airquality?lon=17.58723&lat=48.37741"
+        val ttLon = "17.58723"
+        val ttLat = "48.37741"
+        val baLon = "17.10674"
+        val baLat = "48.14816"
+        userLocation = "https://air-quality.p.rapidapi.com/current/airquality?lon="+baLon+"&lat="+baLat
         Thread {
             try {
                 val client = OkHttpClient()
@@ -99,7 +94,6 @@ private const val ARG_PARAM2 = "param2"
                     stream.cityName.text = "Peľové správy pre okres " + jobject.getString("city_name")
                     val mold = jobject.getJSONArray("data").getJSONObject(0).getString("predominant_pollen_type")
                     if (mold == "Molds"){
-                        notifikacia()
                         stream.moods.text = "Hubové plesne"
                     } else {
                         stream.moods.text = "Ostatné alergény : " + mold
@@ -129,25 +123,23 @@ private const val ARG_PARAM2 = "param2"
         }.start()
     }
 
-    fun notifikacia (){
-        val CHANNEL_ID = "1"
-        val channelId = "test"
-        val description = "Test notification"
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            // Create the NotificationChannel
-            val name = channelId
-            val descriptionText = description
-            val importance = NotificationManager.IMPORTANCE_DEFAULT
-            val mChannel = NotificationChannel(CHANNEL_ID, name, importance)
-            mChannel.description = descriptionText
-            // Register the channel with the system; you can't change the importance
-            // or other notification behaviors after this
-            val notificationManager = getContext()?.getSystemService(NOTIFICATION_SERVICE) as NotificationManager
-            notificationManager.createNotificationChannel(mChannel)
-        }
-    }
-
-
+//    fun notifikacia (){
+//        val CHANNEL_ID = "1"
+//        val channelId = "test"
+//        val description = "Test notification"
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+//            // Create the NotificationChannel
+//            val name = channelId
+//            val descriptionText = description
+//            val importance = NotificationManager.IMPORTANCE_DEFAULT
+//            val mChannel = NotificationChannel(CHANNEL_ID, name, importance)
+//            mChannel.description = descriptionText
+//            // Register the channel with the system; you can't change the importance
+//            // or other notification behaviors after this
+//            val notificationManager = getContext()?.getSystemService(NOTIFICATION_SERVICE) as NotificationManager
+//            notificationManager.createNotificationChannel(mChannel)
+//        }
+//    }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         if (requestCode == locationPermissionCode) {
@@ -184,9 +176,6 @@ private const val ARG_PARAM2 = "param2"
         linkKalendar.paintFlags = linkKalendar.paintFlags or (Paint.UNDERLINE_TEXT_FLAG)
     }
 
-
-
-
     companion object {
         /**
          * Use this factory method to create a new instance of
@@ -206,6 +195,5 @@ private const val ARG_PARAM2 = "param2"
                 }
             }
     }
-
 
 }

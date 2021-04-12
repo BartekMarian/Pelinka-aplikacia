@@ -79,11 +79,6 @@ class KalendarFragment : Fragment() {
         val jsonData: String = response.body().string()
         val jObjectData = JSONObject(jsonData).getJSONArray("data").getJSONObject(0)
 
-                val client1 = OkHttpClient()
-
-
-
-
                 requireActivity().runOnUiThread {
 
                     val city = jObjectData.getString("city_name")
@@ -147,14 +142,12 @@ class KalendarFragment : Fragment() {
                         Glide.with(this).load("https://cdn.dribbble.com/users/2120934/screenshots/6193524/19_mostlysunny.gif").into(parttialy_sky)
                     }
 
-
             }
             } catch (ex: java.lang.Exception) {
                 println("Error in try")
                 ex.printStackTrace()
             }
         }.start()
-
 
         return test
     }

@@ -1,10 +1,7 @@
 package com.example
 
 
-import android.app.AlarmManager
-import android.app.PendingIntent
 import android.app.ProgressDialog
-import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -125,7 +122,6 @@ class Liecba : AppCompatActivity()  {
                                     adapter.add(UserItem_liecba(user, message))
 
                                 }
-                                Notifikacie().hlasenia()
                             }
                         }
 
@@ -238,16 +234,7 @@ class Liecba : AppCompatActivity()  {
         }
     }
 
-    private fun startAlarm(){
-        val alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
-        val intent = Intent(this, AlarmReceiver::class.java)
-        val pendingIntent = PendingIntent.getBroadcast(this, 0, intent, 0)
-        val calendar: Calendar = Calendar.getInstance()
-        calendar.timeInMillis = System.currentTimeMillis()
-        calendar.add(Calendar.SECOND, 3)
-        alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.timeInMillis, pendingIntent)
-        Toast.makeText(baseContext, "Starting Service Alarm", Toast.LENGTH_LONG).show()
-    }
+
 
 
     private fun send_message(uid: String, message: String, profile_user: String) {

@@ -87,4 +87,10 @@
     <string name="pe_ov_kalend_r">Peľový kalendár</string>
     <string name="vlhkos">vlhkosť</string>
     <string name="r_chlos_vetra">rýchlosť vetra</string>
+
+
+    // notifications
+    <string name="channel_name">Pelinka</string>
+    <string name="channel_description">Pelinka warnings</string>
+
 </resources>

@@ -44,15 +44,21 @@
         <activity android:name=".Aktuality" />
         <activity android:name=".Kalendar" />
 
-        <receiver android:name=".AlarmReceiver" />
-        <service android:name=".ForegroundService" />
-        <service android:name=".BackgroundTaskHandler"
-            android:permission="com.google.android.gms.permission.BIND_NETWORK_TASK_SERVICE"
-            android:exported="true">
-        <intent-filter>
-            <action android:name="com.google.android.gms.gcm.ACTION_TASK_READY"/>
-        </intent-filter>
-        </service>
+<!--        <receiver android:name=".Notifikacie$Receiver"-->
+<!--            android:enabled="true"-->
+<!--            android:exported="true">-->
+<!--            <intent-filter>-->
+<!--                <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>-->
+<!--            </intent-filter>-->
+<!--        </receiver>-->
+<!--        <receiver android:name=".BroadcastReceiver.PollenWarning" />-->
+        <receiver
+            android:name=".BroadcastReceiver.PollenWarning"
+            android:enabled="true" />
+
+        <service
+            android:name=".Services.PollenService"
+            android:enabled="true" />
     </application>
 
 </manifest>
