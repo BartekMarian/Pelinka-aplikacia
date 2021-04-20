@@ -78,7 +78,7 @@ class Registracia : AppCompatActivity() {
                             userHashMap["phone"] = userphone
                             userHashMap["useremail"] = useremail
                             userHashMap["password"] = userpassword
-                            userHashMap["switch4"] = false
+                            userHashMap["switch3"] = false
                             refUser!!.updateChildren(userHashMap)
                                     .addOnCompleteListener { task ->
                                         if (task.isSuccessful) {

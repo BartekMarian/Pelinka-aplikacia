@@ -31,20 +31,20 @@ open class  Notifikacie  : AppCompatActivity(){
         super.onStart()
 
         FirebaseDatabase.getInstance().getReference().child("Users").child(firebaseUser!!.uid).child(
-                "switch4"
+                "switch3"
         ).get().addOnSuccessListener {
-            switch4.isChecked = it.value as Boolean
+            switch3.isChecked = it.value as Boolean
         }.addOnFailureListener {
-            switch4.isChecked = false
+            switch3.isChecked = false
         }
 
-            switch4.setOnCheckedChangeListener { buttonView, isChecked ->
+            switch3.setOnCheckedChangeListener { buttonView, isChecked ->
 
             println("test5"+isChecked)
             println("test5"+ FirebaseDatabase.getInstance())
             println("test5"+ firebaseUser!!.uid)
             FirebaseDatabase.getInstance().getReference().child("Users").child(firebaseUser!!.uid)
-                    .child("switch4").setValue(isChecked)   // uloz true or false
+                    .child("switch3").setValue(isChecked)   // uloz true or false
             if (isChecked) {
              //  setAlarm()
                 // calendarInActivity()

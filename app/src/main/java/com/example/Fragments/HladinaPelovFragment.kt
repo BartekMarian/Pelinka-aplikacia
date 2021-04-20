@@ -1,6 +1,7 @@
 package com.example.Fragments
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -67,7 +68,8 @@ private const val ARG_PARAM2 = "param2"
         }
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 5f, this)
     }
-   // @SuppressLint("SetTextI18n")
+
+    @SuppressLint("SetTextI18n")
     override fun onLocationChanged(location: Location) {
         //userLocation = "lon=" + location.longitude + "&lat=" + location.latitude
         val ttLon = "17.58723"
@@ -95,7 +97,11 @@ private const val ARG_PARAM2 = "param2"
                     val mold = jobject.getJSONArray("data").getJSONObject(0).getString("predominant_pollen_type")
                     if (mold == "Molds"){
                         stream.moods.text = "Hubové plesne"
-                    } else {
+                    }
+                    else if (mold == "Trees") {
+                        stream.moods.text = "Drevinové alergény"
+                    }
+                    else {
                         stream.moods.text = "Ostatné alergény : " + mold
                     }
                     val tree =jobject.getJSONArray("data").getJSONObject(0).getInt("pollen_level_tree")
@@ -104,7 +110,7 @@ private const val ARG_PARAM2 = "param2"
                     stream.level_grass.text = "Byliny úroveň "+ grass.toString()
                     val weed =jobject.getJSONArray("data").getJSONObject(0).getInt("pollen_level_weed")
                     stream.level_weed.text = "Trávy úroveň "+weed.toString()
-
+            println(" test pele" + mold+tree+grass+weed+"....................................")
                 val db = FirebaseFirestore.getInstance()
 
                 val user: MutableMap<String, Any> = HashMap()

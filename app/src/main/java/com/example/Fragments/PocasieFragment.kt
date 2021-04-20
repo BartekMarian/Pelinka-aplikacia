@@ -124,6 +124,9 @@ class KalendarFragment : Fragment() {
                     else if (sky == "Light rain"){
                         test.sky_pocasie.text ="Daždivé počasie"
                                 Glide.with(this).load("https://cdn.dribbble.com/users/2120934/screenshots/6193512/11_rain.gif").into(rain_sky)
+                    } else if (sky == "Moderate rain"){
+                        test.sky_pocasie.text ="Mierny dážď"
+                                Glide.with(this).load("https://cdn.dribbble.com/users/2120934/screenshots/6193512/11_rain.gif").into(rain_sky)
                     }
                     else if (sky == "Clear sky"){
                         test.sky_pocasie.text = "Jasno až slnečno"

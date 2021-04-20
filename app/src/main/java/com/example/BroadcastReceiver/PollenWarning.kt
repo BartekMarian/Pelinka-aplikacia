@@ -4,11 +4,13 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.os.Build
+import android.provider.CalendarContract
 import androidx.annotation.RequiresApi
 import com.example.Services.PollenService
 import com.squareup.okhttp.OkHttpClient
 import com.squareup.okhttp.Request
 import org.json.JSONObject
+import java.util.*
 
 
 class PollenWarning : BroadcastReceiver () {
@@ -45,29 +47,29 @@ class PollenWarning : BroadcastReceiver () {
                 val tree = jobject.getJSONArray("data").getJSONObject(0).getInt("pollen_level_tree")
 
                 println("test5" + tree)
-                if (tree == 1) {
+                if (tree == 2) {
 
                     // call the notification service
                     val service = Intent(context, PollenService::class.java)
                     if (intent != null) {
                         service.putExtra("reason", intent.getStringExtra("reason"))
-                      //calendarEvent(context)
+
                     }
                     if (intent != null) {
                         service.putExtra("timestamp", intent.getLongExtra("timestamp", 0))
-                       // calendarEvent(context)
+
                     }
 
                     if (context != null) {
                         context.startService(service)
                         // add calendar event
 
-                      //  calendarEvent(context)
+
                     }
 
 //                    // add calendar event
-//
-//                    calendarEvent(context)
+                             calendarEvent(context)
+                    //calendarEvent(context)
                     println("Test........................................nice kalendar")
                 }
 //                     }
@@ -83,26 +85,19 @@ class PollenWarning : BroadcastReceiver () {
         println("Test.................................after Pollen level")
     }
 
-//    @RequiresApi(Build.VERSION_CODES.N)
-//    fun calendarEvent(context: Context?) {
-//        println("test5, calendar")
-//        val startMillis = Calendar.getInstance().timeInMillis
-//
-//        val intent = Intent(Intent.ACTION_INSERT)
-//            .setData(CalendarContract.Events.CONTENT_URI)
-//            .putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, startMillis)
-//            .putExtra(CalendarContract.Events.EVENT_COLOR, Color.RED)
-//            .putExtra(CalendarContract.Events.TITLE, "Pelinka")
-//            .putExtra(
-//                CalendarContract.Events.DESCRIPTION,
-//                "Zmena hladiny pelov v ovzdusi")
-//            .putExtra(
-//                CalendarContract.Events.AVAILABILITY,
-//                CalendarContract.Events.AVAILABILITY_FREE
-//            )
-//            .putExtra(CalendarContract.Events.CALENDAR_DISPLAY_NAME, "NAme test")
-//        if (context != null) {
-//            context.startActivity(intent)
-//        }
-//    }
+    @RequiresApi(Build.VERSION_CODES.N)
+   private fun calendarEvent( context: Context?) {
+        println("test5, calendar")
+       val startMillis = Calendar.getInstance()
+
+        val intent = Intent(Intent.ACTION_INSERT)
+        intent.setType("vnd.android.cursor.item/event")
+                .putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME,startMillis)
+                .putExtra(CalendarContract.Events.TITLE, "Pelinka")
+                .putExtra(CalendarContract.Events.DESCRIPTION,
+                "Zmena hladiny pelov v ovzdusi")
+                .putExtra("title","Calendar Event")
+
+        context?.startActivity(intent)
+    }
 }

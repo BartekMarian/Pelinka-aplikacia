@@ -8,7 +8,6 @@ import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.media.RingtoneManager
 import android.os.Build
-import android.provider.CalendarContract
 import androidx.annotation.RequiresApi
 import com.example.MainActivity2
 import com.example.R
@@ -81,7 +80,6 @@ class PollenService : IntentService("NotificationService")  {
             val calendar = Calendar.getInstance()
             calendar.timeInMillis = timestamp
 
-
             val pendingIntent = PendingIntent.getActivity(context, 0, notifyIntent, PendingIntent.FLAG_UPDATE_CURRENT)
             val res = this.resources
             val uri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
@@ -92,8 +90,8 @@ class PollenService : IntentService("NotificationService")  {
                 mNotification = Notification.Builder(this, CHANNEL_ID)
                     // Set the intent that will fire when the user taps the notification
                     .setContentIntent(pendingIntent)
-                    .setSmallIcon(R.drawable.allergy)
-                    .setLargeIcon(BitmapFactory.decodeResource(res, R.mipmap.ic_launcher))
+                    .setSmallIcon(R.mipmap.ic_launcher)
+                    .setLargeIcon(BitmapFactory.decodeResource(res,R.drawable.allergy ))
                     .setAutoCancel(true)
                     .setContentTitle(title)
                     .setStyle(Notification.BigTextStyle()
@@ -115,6 +113,7 @@ class PollenService : IntentService("NotificationService")  {
                     .setSound(uri)
                     .setContentText(message).build()
                 println("test5 : ..............................neposlal notif1")
+                 // calendarEvent()
             }
 
 
@@ -123,27 +122,27 @@ class PollenService : IntentService("NotificationService")  {
             // mNotificationId is a unique int for each notification that you must define
             notificationManager.notify(mNotificationId, mNotification)
         }
-        calendarEvent()
+
       println("test5 : ..............................poslal notif2")
     }
-    @RequiresApi(Build.VERSION_CODES.N)
-    fun calendarEvent() {
-        println("test5, calendar")
-        val startMillis = Calendar.getInstance().timeInMillis
-
-        val intent = Intent(Intent.ACTION_INSERT_OR_EDIT)
-                .setData(CalendarContract.Events.CONTENT_URI)
-                .putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, startMillis)
-                .putExtra(CalendarContract.Events.EVENT_COLOR, Color.RED)
-                .putExtra(CalendarContract.Events.TITLE, "Pelinka")
-                .putExtra(
-                        CalendarContract.Events.DESCRIPTION,
-                        "Zmena hladiny pelov v ovzdusi")
-                .putExtra(
-                        CalendarContract.Events.AVAILABILITY,
-                        CalendarContract.Events.AVAILABILITY_FREE
-                )
-                .putExtra(CalendarContract.Events.CALENDAR_DISPLAY_NAME, "NAme test")
-         startActivity(intent)
-    }
+//    @RequiresApi(Build.VERSION_CODES.N)
+//    fun calendarEvent() {
+//        println("test5, calendar")
+//        val startMillis = Calendar.getInstance().timeInMillis
+//
+//        val intent = Intent(Intent.ACTION_INSERT_OR_EDIT)
+//                .setData(CalendarContract.Events.CONTENT_URI)
+//                .putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, startMillis)
+//                .putExtra(CalendarContract.Events.EVENT_COLOR, Color.RED)
+//                .putExtra(CalendarContract.Events.TITLE, "Pelinka")
+//                .putExtra(
+//                        CalendarContract.Events.DESCRIPTION,
+//                        "Zmena hladiny pelov v ovzdusi")
+//                .putExtra(
+//                        CalendarContract.Events.AVAILABILITY,
+//                        CalendarContract.Events.AVAILABILITY_FREE
+//                )
+//                .putExtra(CalendarContract.Events.CALENDAR_DISPLAY_NAME, "NAme test")
+//         startActivity(intent)
+//    }
 }

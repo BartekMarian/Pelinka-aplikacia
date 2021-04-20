@@ -82,7 +82,7 @@ class MainActivity2 : AppCompatActivity() {
         })
 
         FirebaseDatabase.getInstance().getReference().child("Users").child(firebaseUser!!.uid).child(
-            "switch4"
+            "switch3"
         ).get().addOnSuccessListener {
 //            switch4.isChecked = it.value as Boolean
             println("Test............................................1" + it.value)

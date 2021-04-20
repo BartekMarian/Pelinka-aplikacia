@@ -62,7 +62,7 @@
             android:layout_marginTop="60dp"
             android:layout_marginRight="20dp"
             android:layout_weight="1"
-            android:text="Nový príspevok v sekcii Diskusia    "
+            android:text="Zmena hladiny drevinových peľov    "
             android:textColor="@color/teal_700"
             android:textSize="16sp"
             android:textStyle="bold"
@@ -84,7 +84,7 @@
             android:layout_marginTop="30dp"
             android:layout_marginRight="20dp"
             android:layout_weight="1"
-            android:text="Nový príspevok v sekcii Liečba    "
+            android:text="Zmena hladiny trávových peľov    "
             android:textColor="@color/teal_700"
             android:textSize="16sp"
             android:textStyle="bold"
@@ -106,72 +106,6 @@
             android:layout_marginTop="30dp"
             android:layout_marginRight="20dp"
             android:layout_weight="1"
-            android:text="Nový príspevok v sekcii Aktuality    "
-            android:textColor="@color/teal_700"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            tools:ignore="UseSwitchCompatOrMaterialXml">
-
-        </Switch>
-    </LinearLayout>
-    <LinearLayout
-        android:id="@+id/layout_switch4"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/layout_switch3">
-
-        <Switch
-            android:id="@+id/switch4"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="30dp"
-            android:layout_marginRight="20dp"
-            android:layout_weight="1"
-            android:text="Zmena hladiny drevinových peľov    "
-            android:textColor="@color/teal_700"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            tools:ignore="UseSwitchCompatOrMaterialXml">
-
-        </Switch>
-    </LinearLayout>
-    <LinearLayout
-        android:id="@+id/layout_switch5"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/layout_switch4">
-
-        <Switch
-            android:id="@+id/switch5"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="30dp"
-            android:layout_marginRight="20dp"
-            android:layout_weight="1"
-            android:text="Zmena hladiny trávových peľov    "
-            android:textColor="@color/teal_700"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            tools:ignore="UseSwitchCompatOrMaterialXml">
-
-        </Switch>
-    </LinearLayout>
-    <LinearLayout
-        android:id="@+id/layout_switch6"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/layout_switch5">
-
-        <Switch
-            android:id="@+id/switch6"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="30dp"
-            android:layout_marginRight="20dp"
-            android:layout_weight="1"
             android:text="Zmena hladiny bylinových peľov    "
             android:textColor="@color/teal_700"
             android:textSize="16sp"
@@ -180,5 +114,4 @@
 
         </Switch>
     </LinearLayout>
-
 </RelativeLayout>

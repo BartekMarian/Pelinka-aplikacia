@@ -54,11 +54,20 @@
 <!--        <receiver android:name=".BroadcastReceiver.PollenWarning" />-->
         <receiver
             android:name=".BroadcastReceiver.PollenWarning"
-            android:enabled="true" />
+            android:enabled="true"
+            android:exported="true">
+        <intent-filter>
+            <action android:name="android.intent.action.BOOT_COMPLETED"/>
+            <action android:name="android.intent.action.INPUT_METHOD_CHANGED" />
+            <action android:name="android.net.conn.CONNECTIVITY_CHANGE"
+                tools:ignore="BatteryLife" />
+        </intent-filter>
+        </receiver>
 
         <service
             android:name=".Services.PollenService"
-            android:enabled="true" />
+            android:enabled="true">
+        </service>
     </application>
 
 </manifest>
